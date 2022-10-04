@@ -50,30 +50,65 @@ function game() {
   let winCond = 0;
 
   for (let i = 0; winCond == 0; i++) {
-    let playerSelection = prompt(
-      "Rock / Paper / Scissors - What's Your Choice? First to 5 wins..."
-    );
-    let computerSelection = getComputerChoice();
+    let platerSelection = 5;
+    if (i == 0) {
+      let playerSelection = prompt(
+        "Rock / Paper / Scissors - What's Your Choice? First to 5 wins..."
+      );
 
-    let winner = playRound(playerSelection, computerSelection);
+      let computerSelection = getComputerChoice();
 
-    if (winner == 1) {
-      userCount++;
-    } else if (winner == 2) {
-      computerCount++;
-    }
+      let winner = playRound(playerSelection, computerSelection);
 
-    if (userCount == 5 || computerCount == 5) {
-      winCond++;
-    }
+      if (winner == 1) {
+        userCount++;
+      } else if (winner == 2) {
+        computerCount++;
+      }
 
-    if (winCond == 0) {
-      if (userCount > computerCount) {
-        console.log("You are winning " + userCount + " to " + computerCount);
-      } else if (computerCount > userCount) {
-        console.log("You are losing " + computerCount + " to " + userCount);
-      } else if (userCount == computerCount) {
-        console.log("Game is tied " + userCount + " to " + computerCount);
+      if (userCount == 5 || computerCount == 5) {
+        winCond++;
+      }
+
+      if (winCond == 0) {
+        if (userCount > computerCount) {
+          console.log("You are winning " + userCount + " to " + computerCount);
+        } else if (computerCount > userCount) {
+          console.log("You are losing " + computerCount + " to " + userCount);
+        } else if (userCount == computerCount) {
+          console.log("Game is tied " + userCount + " to " + computerCount);
+        }
+      }
+    } else {
+      let playerSelection = prompt(
+        "Rock / Paper / Scissors - What's Your Choice? Current Score - Computer: " +
+          computerCount +
+          " / You: " +
+          userCount
+      );
+
+      let computerSelection = getComputerChoice();
+
+      let winner = playRound(playerSelection, computerSelection);
+
+      if (winner == 1) {
+        userCount++;
+      } else if (winner == 2) {
+        computerCount++;
+      }
+
+      if (userCount == 5 || computerCount == 5) {
+        winCond++;
+      }
+
+      if (winCond == 0) {
+        if (userCount > computerCount) {
+          console.log("You are winning " + userCount + " to " + computerCount);
+        } else if (computerCount > userCount) {
+          console.log("You are losing " + computerCount + " to " + userCount);
+        } else if (userCount == computerCount) {
+          console.log("Game is tied " + userCount + " to " + computerCount);
+        }
       }
     }
   }
