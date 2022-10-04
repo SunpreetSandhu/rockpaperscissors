@@ -47,12 +47,11 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   // plays and sees who wins the first to 5
 
-  let userCount = 0;
-  let computerCount = 0;
+  let winCond = 0;
 
-  for (let i = 0; userCount != 5 || computerCount != 5; i++) {
+  for (let i = 0; winCond == 0; i++) {
     let playerSelection = prompt(
-      "Rock / Paper / Scissors - What's Your Choice?"
+      "Rock / Paper / Scissors - What's Your Choice? First to 5 wins..."
     );
     let computerSelection = getComputerChoice();
 
@@ -63,7 +62,40 @@ function game() {
     } else if (winner == 2) {
       computerCount++;
     }
+
+    if (userCount == 5 || computerCount == 5) {
+      winCond++;
+    }
+
+    if (winCond == 0) {
+      if (userCount > computerCount) {
+        console.log("You are winning " + userCount + " to " + computerCount);
+      } else if (computerCount > userCount) {
+        console.log("You are losing " + computerCount + " to " + userCount);
+      } else if (userCount == computerCount) {
+        console.log("Game is tied " + userCount + " to " + computerCount);
+      }
+    }
   }
 }
 
-playRound(playerSelection, computerSelection);
+let userCount = 0;
+let computerCount = 0;
+game();
+if (userCount == 5) {
+  console.log(
+    "Congragulations! You won! The final score was " +
+      userCount +
+      " to " +
+      computerCount +
+      "."
+  );
+} else if (computerCount == 5) {
+  console.log(
+    "Oh no! You lost! Refresh the page to play again. The final score was " +
+      userCount +
+      " to " +
+      computerCount +
+      "."
+  );
+}
