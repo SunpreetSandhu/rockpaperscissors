@@ -1,10 +1,8 @@
 function getComputerChoice() {
-  return Math.floor(Math.random() * 3) + 1; //get num between 1 and 3
+  return Math.floor(Math.random() * 3) + 1;
 }
 
 function playRound(playerSelection, computerSelection) {
-  //finds out who won, player or comp
-
   if (playerSelection.toLowerCase() == "rock") {
     if (computerSelection == 1) {
       console.log("It's a tie!");
@@ -44,13 +42,7 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-//TODO:
-//add a win message and reload to play again button
-//Add a message below score to say who won most recent game or if it was tie
-//
-
 function game() {
-  // plays and sees who wins the first to 5
   let winner = 0;
   const container = document.querySelector("#container");
   const results = document.createElement("div");
@@ -93,7 +85,7 @@ function game() {
 
         const playAgain = document.createElement("button");
         playAgain.textContent = "Play Again!";
-        container.appendChild(playAgain); //child to things u want in the same place but not written at same tiem
+        container.appendChild(playAgain);
         playAgain.addEventListener("click", () => {
           location.reload();
         });
@@ -105,7 +97,7 @@ function game() {
 
         const playAgain = document.createElement("button");
         playAgain.textContent = "Play Again!";
-        container.appendChild(playAgain); //child to things u want in the same place but not written at same tiem
+        container.appendChild(playAgain);
         playAgain.addEventListener("click", () => {
           location.reload();
         });
