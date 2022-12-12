@@ -44,93 +44,77 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+//TODO:
+//add a win message and reload to play again button
+//Add a message below score to say who won most recent game or if it was tie
+//
+
 function game() {
   // plays and sees who wins the first to 5
+  let winner = 0;
+  const container = document.querySelector("#container");
+  const results = document.createElement("div");
+  container.appendChild(results);
 
-  let winCond = 0;
+  const disp = document.createElement("p");
+  container.appendChild(disp);
+  results.textContent = "You: 0 | Computer: 0";
+  disp.textContent = "Get 5 to Win!";
 
-  for (let i = 0; winCond == 0; i++) {
-    let platerSelection = 5;
-    if (i == 0) {
-      let playerSelection = prompt(
-        "Rock / Paper / Scissors - What's Your Choice? First to 5 wins..."
-      );
-
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
       let computerSelection = getComputerChoice();
-
+      let playerSelection = button.className;
       let winner = playRound(playerSelection, computerSelection);
-
+      let b = userCount == 0 && computerCount == 0;
       if (winner == 1) {
         userCount++;
+        results.textContent =
+          "You: " + userCount + " | Computer: " + computerCount;
+        disp.textContent = "You Won That Round!";
       } else if (winner == 2) {
         computerCount++;
+        results.textContent =
+          "You: " + userCount + " | Computer: " + computerCount;
+        disp.textContent = "You Lost That Round!";
+      } else if (winner == 0) {
+        results.textContent =
+          "You: " + userCount + " | Computer: " + computerCount;
+
+        disp.textContent = "That Round Was a Tie!";
       }
 
-      if (userCount == 5 || computerCount == 5) {
-        winCond++;
+      if (userCount == 5) {
+        disp.textContent = "You Win!";
+        document.getElementById("1").disabled = true;
+        document.getElementById("2").disabled = true;
+        document.getElementById("3").disabled = true;
+
+        const playAgain = document.createElement("button");
+        playAgain.textContent = "Play Again!";
+        container.appendChild(playAgain); //child to things u want in the same place but not written at same tiem
+        playAgain.addEventListener("click", () => {
+          location.reload();
+        });
+      } else if (computerCount == 5) {
+        disp.textContent = "Computer Wins!";
+        document.getElementById("1").disabled = true;
+        document.getElementById("2").disabled = true;
+        document.getElementById("3").disabled = true;
+
+        const playAgain = document.createElement("button");
+        playAgain.textContent = "Play Again!";
+        container.appendChild(playAgain); //child to things u want in the same place but not written at same tiem
+        playAgain.addEventListener("click", () => {
+          location.reload();
+        });
       }
-
-      if (winCond == 0) {
-        if (userCount > computerCount) {
-          console.log("You are winning " + userCount + " to " + computerCount);
-        } else if (computerCount > userCount) {
-          console.log("You are losing " + computerCount + " to " + userCount);
-        } else if (userCount == computerCount) {
-          console.log("Game is tied " + userCount + " to " + computerCount);
-        }
-      }
-    } else {
-      let playerSelection = prompt(
-        "Rock / Paper / Scissors - What's Your Choice? Current Score - Computer: " +
-          computerCount +
-          " / You: " +
-          userCount
-      );
-
-      let computerSelection = getComputerChoice();
-
-      let winner = playRound(playerSelection, computerSelection);
-
-      if (winner == 1) {
-        userCount++;
-      } else if (winner == 2) {
-        computerCount++;
-      }
-
-      if (userCount == 5 || computerCount == 5) {
-        winCond++;
-      }
-
-      if (winCond == 0) {
-        if (userCount > computerCount) {
-          console.log("You are winning " + userCount + " to " + computerCount);
-        } else if (computerCount > userCount) {
-          console.log("You are losing " + computerCount + " to " + userCount);
-        } else if (userCount == computerCount) {
-          console.log("Game is tied " + userCount + " to " + computerCount);
-        }
-      }
-    }
-  }
+    });
+  });
 }
 
-let userCount = 0;
+let userCount = 0; //global variables
 let computerCount = 0;
+
 game();
-if (userCount == 5) {
-  console.log(
-    "Congragulations! You won! The final score was " +
-      userCount +
-      " to " +
-      computerCount +
-      "."
-  );
-} else if (computerCount == 5) {
-  console.log(
-    "Oh no! You lost! Refresh the page to play again. The final score was " +
-      userCount +
-      " to " +
-      computerCount +
-      "."
-  );
-}
